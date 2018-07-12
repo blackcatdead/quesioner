@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page %}
+{{page}}
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static ''%}adminlte/plugins/iCheck/all.css">
+	<link rel="stylesheet" href="{% static ''%}adminlte/plugins/iCheck/square/blue.css">
+{% endblock %}
+
+{% block content %}
+	{% if messages %}
+	  	{% for message in messages %}
+	  <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+	 		<div class="alert alert-{{ message.tags }} alert-dismissible">
+	    		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	    		<center>
+	    			{{ message }}
+	    		</center>
+	  		</div>
+	  	{% endfor %}
+  	{% endif %}
+	{% if dataresponden.stage == 1 %}
+		{% if not request.GET.n %}
+			{% include "r1.html" %}
+		{% elif request.GET.n == '1' %}
+			{% include "r1_1.html" %}
+		{% elif request.GET.n == '2' %}
+			{% include "r1_2.html" %}
+		{% endif %}
+	{% elif dataresponden.stage == 2 %}
+		{% if not request.GET.n %}
+			{% include "r2.html" %}
+		{% elif request.GET.n == '1' %}
+			{% include "r2_1.html" %}
+		{% elif request.GET.n == '2' %}
+			{% include "r2_2.html" %}
+		{% elif request.GET.n == '3' %}
+			{% include "r2_3.html" %}
+		{% elif request.GET.n == '4' %}
+			{% include "r2_4.html" %}
+		{% elif request.GET.n == '5' %}
+			{% include "r2_5.html" %}
+		{% endif %}
+	{% elif dataresponden.stage == 3 %}
+		{% if not request.GET.n %}
+			{% include "r3.html" %}
+		{% endif %}
+	{% elif dataresponden.stage == 4 %}
+		{% if not request.GET.n %}
+			{% include "r4.html" %}
+		{% endif %}
+	{% endif%}
+
+{% endblock %}
+
+
+{% block foot %}
+<script src="{% static ''%}adminlte/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	  $('input[type="radio"]').iCheck({
+	    checkboxClass: 'icheckbox_square-blue',
+	    radioClass: 'iradio_square-blue',
+	    increaseArea: '20%' // optional
+	  });
+	});
+	
+
+</script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "baseadmin.html" %}
+{% load static %}
+{% block page %}
+{{page}} | 
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-12">
+		{% if messages %}
+		    {% for message in messages %}
+		    <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+		    <div class="alert alert-{{ message.tags }} alert-dismissible fade" id="alert_msg">
+            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            	{{ message }}
+          	</div>
+		    {% endfor %}
+		{% endif %}
+		<div class="box">
+			<div class="box-header with-border">
+			  	<h3 class="box-title">Detail Responden</h3>
+			  	<div class="box-tools pull-right">
+			    </div>
+			</div><!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-striped table-hover">
+			        <tbody>
+			        	<tr>
+						  <th>ID</th>
+						  <td>
+						    {{ responden.id_responden }}
+						  </td>
+						</tr>
+						<tr>
+						  <th>Nama</th>
+						  <td>
+						    {{ responden.nama }}
+						  </td>
+						</tr>
+						<tr>
+						  <th>Group</th>
+						  <td>
+						    {{ responden.group }}
+						  </td>
+						</tr>
+						<tr>
+						  <th>Penyelesaian</th>
+						  <td>
+						    {{ responden.progress }}%
+						  </td>
+						</tr>
+						<tr>
+						  <th>Status</th>
+						  <td><span class="label label-{% if responden.status == 1 %}primary{% elif responden.status == 2 %}success{% elif responden.status == 3 %}danger{% endif%}">{% if responden.status == 1 %}Aktif{% elif responden.status == 2 %}Selesai{% elif responden.status == 3 %}Gugur{% endif%}</span></td>
+						</tr>
+						<tr>
+						  <th>Score</th>
+						  <td>{{ responden.scorefinal }}/100</td>
+						</tr>
+						<tr>
+						  <th>Mulai Mengerjakan</th>
+						  <td>{{ responden.start }}</td>
+						</tr>
+						<tr>
+						  <th>Selesai Mengerjakan</th>
+						  <td>{{ responden.end }}</td>
+						</tr>
+						<tr>
+						  <th>Durasi Mengerjakan</th>
+						  <td>{{ responden.durasimengerjakan }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div><!-- /.box-body -->
+			
+		</div><!-- /.box -->
+		<div class="box">
+			<div class="box-header with-border">
+			  	<h3 class="box-title">Riwayat Mengerjakan</h3>
+			  	<div class="box-tools pull-right ">
+			    </div>
+			</div><!-- /.box-header -->
+			<div class="box-body">
+				<table class="table table-striped table-hover">
+			        <tbody>
+			        	<tr>
+						  <th>Pertanyaan</th>
+						  <th>Jawaban</th>
+						  <th>Result</th>
+						  <th>Waktu Menjawab</th>
+						</tr>
+						{% for jaw in  jawabans %}
+							<tr class="{% if jaw.nilai == None %}success{% else %}danger{% endif %}">
+							  <td>{{ jaw.namapertanyaan }}</td>
+							  <td>{{ jaw.jawaban }}</td>
+							  <td>{% if jaw.nilai == None %}Benar{% else %}Salah{% endif %}</td>
+							  <td>{{ jaw.created_at }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div><!-- /.box-body -->
+			
+		</div><!-- /.box -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block foot %}
+
+{% endblock %}

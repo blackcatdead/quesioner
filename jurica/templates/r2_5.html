@@ -1,0 +1,44 @@
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title">RESPON 2</h3>
+	</div>
+	<form method="POST" action="">
+		{% csrf_token %}
+		<div class="box-body">
+			<p>Berdasarkan deskripsi profil yang ada, jawablah pertanyaan-pertanyaan berikut</p>
+			<ol>
+				<li>
+					<p>Apakah unit bisnis minuman Perusahaan CITRA akan menerima bonus pada tahun 2017 (berdasarkan evaluasi tim manajemen pada akhir bulan Oktober 2017)?</p>
+					<div class="form-group">
+						<ul style="list-style-type:none">
+							<li><input type="radio" name="q-4" class="flat-blue" value="1" required> A. Ya</li>
+		                	<li><input type="radio" name="q-4" class="flat-blue" value="2" required> B. Tidak</li>
+						</ul>
+					</div>
+
+				</li>
+				<li>
+					<p>Perusahaan CITRA memiliki Kode Etik:</p>
+					<div class="form-group">
+						<ul style="list-style-type:none">
+							<li><input type="radio" name="q-5" class="flat-blue" value="1" required> A. Ya</li>
+		                	<li><input type="radio" name="q-5" class="flat-blue" value="2" required> B. Tidak</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<p>Apakah kode etik Perusahaan CITRA memiliki sanksi yang jelas?</p>
+					<div class="form-group">
+						<ul style="list-style-type:none">
+							<li><input type="radio" name="q-6" class="flat-blue" value="1" required> A. Ya</li>
+		                	<li><input type="radio" name="q-6" class="flat-blue" value="2" required> B. Tidak</li>
+						</ul>
+					</div>
+				</li>
+			</ol>
+		</div>
+		<div class="box-footer">
+		    <button type="submit" class="btn btn-primary pull-right">Menuju Respon #3</button>
+		</div>
+	</form>
+</div>

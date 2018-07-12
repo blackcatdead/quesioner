@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page %}
+{{page}}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title">INFORMASI UNTUK PARTISIPAN</h3>
+	</div>
+	<div class="box-body">
+		<ol>
+			<li>Anda memiliki <strong>100 poin</strong> ketika mulai dalam simulasi ini, dan akan menjadi milik Anda apabila seluruh tugas berhasil Anda selesaikan dalam satu kali kesempatan.</li>
+			<li>Ada <strong>tiga kali kesempatan</strong> untuk mendapatkan jawaban yang tepat untuk setiap respon dengan cara mengulang atau kembali kehalaman sebelumnya, namun poin akan <strong>berkurang 25 poin</strong> untuk setiap <strong>pengulangan</strong>. Diharapkan Anda memahami teks dengan seksama.</li>
+			<li>Kesempatan mendapatkan <strong>kompensasi hilang apabila Anda berhenti di tengah jalan baik karena mengundurkan diri atau gagal</strong> melewati suatu babak respon setelah tiga kali pengulangan.</li>
+			<li>Insentif diberikan kepada 20 partisipan pertama dengan poin maksimal.</li>
+		</ol>
+	</div>
+	<div class="box-footer">
+		{% if dataresponden.stage %}
+			 <a type="submit" class="btn btn-primary pull-right" href="{% url 'pertanyaan' %}">Menuju Pertanyaan</a>
+		{% else %}
+			<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Menuju Pertanyaan</button>
+		{% endif %}
+	   
+	    
+	    
+	    
+	</div>
+
+	<!-- /.box-body -->
+</div>
+{% if not dataresponden.stage %}
+	<div class="modal fade modal" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">KONFIRMASI</h4>
+				</div>
+				<div class="modal-body">
+					<p>Selanjutnya anda akan disuguhkan beberapa pertanyaan yang harus anda jawab. <i>Score</i> dan waktu mengerjakan akan dihitung semenjak anda meng-Klik tombol "<strong>MULAI</strong>".</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Nanti dulu</button>
+					<a class="btn btn-success" href="{% url 'mulaimengerjakan' %}">MULAI</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endif %}
+
+<!-- /.box -->
+{% endblock %}
+
+
+{% block foot %}
+	
+{% endblock %}

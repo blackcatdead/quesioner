@@ -1,0 +1,133 @@
+{% extends "baseadmin.html" %}
+{% load static %}
+{% block page %}
+{{page}} | 
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.css">
+<style type="text/css">
+	.table
+	{
+		display: block;
+		overflow-x: scroll;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-12">
+		{% if messages %}
+		    {% for message in messages %}
+		    <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+		    <div class="alert alert-{{ message.tags }} alert-dismissible fade" id="alert_msg">
+            	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            	{{ message }}
+          	</div>
+		    {% endfor %}
+		{% endif %}
+		<div class="box">
+			<div class="box-header with-border">
+			  	<h3 class="box-title">Semua Responden</h3>
+			  	<div class="box-tools pull-right">
+			    </div>
+			</div><!-- /.box-header -->
+			<div class="box-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<table id="grid-data" class="table table-condensed table-hover table-striped">
+						    <thead>
+						        <tr>
+						            <th data-column-id="id" data-type="numeric" data-sortable="true" data-width="80">ID</th>
+						            <th data-column-id="nama" data-width="100%">Nama</th>
+						            <th data-column-id="email" data-width="220">Email</th>
+						            <th data-column-id="group" data-width="70">Group</th>
+						            <!-- <th data-column-id="daftar" data-width="200">Tanggal Daftar</th> -->
+						            <th data-column-id="penyelesaian" data-width="120">Penyelesaian</th>
+						            <th data-column-id="status" data-width="70">Status</th>
+						            <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="100"></th>
+						        </tr>
+						    </thead>
+						</table>
+					</div>
+				</div>
+				
+			</div><!-- /.box-body -->
+			<div class="box-footer">
+				<a href="{% url 'tambahresponden' %}" class="btn btn-block btn-primary btn-flat">Tambah Responden</a>
+			</div>
+		</div><!-- /.box -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block foot %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.fa.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.fa.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+
+<script type="text/javascript">
+	var grid = $("#grid-data").bootgrid({
+	    ajax: true,
+	    post: function ()
+	    {
+	        /* To accumulate custom parameter with the request object */
+	        return {
+	            id: "asdasd"
+	        };
+	    },
+	    url: "/ajax/table_responden/",
+	    formatters: {
+	        "commands": function(column, row)
+	        {
+	        	return '<button type="button" class="btn btn-xs btn-default command-detail" data-row-id="' + row.id + '"><span class="fa fa-list-alt"></span></button>'
+	            +'<button type="button" class="btn btn-xs btn-default command-edit" data-row-id="' + row.id + '"><span class="fa fa-pencil"></span></button> '
+	            +'<button type="button" class="btn btn-xs btn-default command-delete" data-row-id="' + row.id + '"><span class="fa fa-trash-o"></span></button>'
+	            +'<button type="button" class="btn btn-xs btn-default command-refresh" data-row-id="' + row.id + '"><span class="fa fa-refresh"></span></button>';
+	        }
+	    }
+	}).on("loaded.rs.jquery.bootgrid", function()
+	{
+	    /* Executes after data is loaded and rendered */
+	    grid.find(".command-edit").on("click", function(e)
+	    {
+	        // alert("You pressed edit on row: " + $(this).data("row-id"));
+	        window.location.href = "{% url 'ubahresponden' %}?id="+$(this).data("row-id");
+	    }).end().find(".command-delete").on("click", function(e)
+	    {
+	        window.location.href = "{% url 'hapusresponden' %}?id="+$(this).data("row-id");
+	    }).end().find(".command-detail").on("click", function(e)
+	    {
+	        window.location.href = "{% url 'detailresponden' %}?id="+$(this).data("row-id");
+	    }).end().find(".command-refresh").on("click", function(e)
+	    {
+	        window.location.href = "{% url 'resetresponden' %}?id="+$(this).data("row-id");
+	    });
+	});
+
+	$(document).ready (function(){
+  		{% if messages %}
+			{% for message in messages %}
+	          	$.bootstrapGrowl('{{ message }}',{
+		            type: '{{ message.tags }}',
+		            delay: 2000,
+		            position: {
+			            from: "bottom",
+			            align: "left"
+			        }
+		        });
+
+			{% endfor %}
+		{% endif %}
+	});
+
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title">PERAN ANDA #2</h3>
+	</div>
+	<div class="box-body">
+		{% if dataresponden.group in list123 %}
+			<p>Anda adalah seorang pribadi yang aktif, penuhpercaya diri, dan penyuka tantangan. Anda fokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Dengan kepribadian itu, maka setiap ada kesempatan yang membuat Anda sukses, maka diambil.</p>
+			<p>Kesuksesan bagi Anda adalah tercapainya hasil positif dan kegagalan adalah tidak tercapainya hasil positif, sehingga berjuang berjuang untuk unggul dalam pekerjaan dan mendapatkan imbalan yang tinggi (penghargaan dan bonus).</p>
+		{% else %}
+			<p>Anda adalah seorang pribadi yang tenang, dan memiliki pendirian yang teguh. Anda fokus pada keselamatan dan keamanan , sehingga cenderung menghindari tantangan . Dengan kepribadian itu, maka Anda sangat berhati-hati dalam bertindak (lebih baik aman dari pada menyesal nanti).</p>
+			<p>Kesuksesan bagi Anda adalah tidak adanya hasil negatif dan kegagalan adalah adanya hasilnegatif. BagiAnda menghindari berbuat kesalahan adalah sebagai wujud tanggung jawab dan keamanan Anda.</p>
+		{% endif %}
+		
+	</div>
+	<div class="box-footer">
+	    <a href="{% url 'pertanyaan' %}/?n=2" class="btn btn-primary pull-right">Next</a>
+	</div>
+
+	<!-- /.box-body -->
+</div>
