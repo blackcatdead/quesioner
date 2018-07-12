@@ -25,7 +25,7 @@ SECRET_KEY = 'y+l!#8opt0x*99rconq#yqv^-p#tfhb@s8!9pcjeyn$-2aek2q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['167.99.65.216','localhost']
+ALLOWED_HOSTS = ['178.128.122.169','localhost','jurica.rikhsan.com']
 
 
 # Application definition
