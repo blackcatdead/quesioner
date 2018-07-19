@@ -212,7 +212,7 @@ def submitanswer(id_r, quest,val):
 
 	group=r.group
 
-	print 'group='+str(group)+'| q='+str(quest)+'| result='+str(anz[group][quest])
+	# print 'group='+str(group)+'| q='+str(quest)+'| result='+str(anz[group][quest])
 
 	if anz[group][quest] is 0:
 		r.save()
