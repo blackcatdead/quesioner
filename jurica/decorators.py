@@ -8,8 +8,8 @@ def tesdeco(func):
         	return redirect('masuk/?init=0')
         else:
         	return func(request, *args, **kwargs)
-	decorated.__doc__ = func.__doc__
-	decorated.__name__ = func.__name__
+	# decorated.__doc__ = func.__doc__
+	# decorated.__name__ = func.__name__
     return decorated
 
 def decoadmin(func):
@@ -19,8 +19,8 @@ def decoadmin(func):
             return redirect('masukadmin')
         else:
             return func(request, *args, **kwargs)
-    decorated.__doc__ = func.__doc__
-    decorated.__name__ = func.__name__
+    # decorated.__doc__ = func.__doc__
+    # decorated.__name__ = func.__name__
     return decorated
 
 

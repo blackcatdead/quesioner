@@ -316,6 +316,7 @@ from django.utils import timezone
 @decoadmin
 def table_responden(request):
 	response_data = {}
+
 	ord= '-id_responden'
 	if request.POST.get("sort[id]", ""):
 		ord= '-id_responden' if request.POST.get("sort[id]", "")=='desc' else 'id_responden'
@@ -335,13 +336,18 @@ def table_responden(request):
 	# 	ord= '-tags' if request.POST.get("sort[tags]", "")=='desc' else 'tags'
 	data_posts= Responden.objects.filter(nama__icontains=request.POST.get("searchPhrase", "")).all().order_by(ord) 
 	response_data['total'] = data_posts.count()
-	current= (int(request.POST.get("current", "0"))*int(request.POST.get("rowCount", "10")))-int(request.POST.get("rowCount", "10"))
+	current= (int(request.POST.get("current", "1"))*int(request.POST.get("rowCount", "10")))-int(request.POST.get("rowCount", "10"))
 	rowcount=  (str(response_data['total']) if request.POST.get("rowCount", "10") == '-1' else current+int(request.POST.get("rowCount", "10")))
 	response_data['current'] = int(request.POST.get("current", "0"))
 	response_data['rowCount'] = int(request.POST.get("rowCount", "10"))
-	data = serializers.serialize("python", data_posts[str(current) : str(rowcount)])
+	# print('rowCounta '+str(int(request.POST.get("rowCount", "10"))))
+	# print('currenta '+str(int(request.POST.get("current", "0"))))
+	# print('current '+str(current))
+	# print('rowcount '+str(rowcount))
+	data = serializers.serialize("python", data_posts[int(current) : int(rowcount)])
 	rows=[]
 	rowscount=0
+	
 	for x in data:
 		dt={}
 		dt['id']=x['pk']
