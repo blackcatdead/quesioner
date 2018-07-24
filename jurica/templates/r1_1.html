@@ -1,12 +1,23 @@
+{% load static %}
 <div class="box box-default">
 	<div class="box-header with-border">
 		<h3 class="box-title">PERAN ANDA #2</h3>
 	</div>
 	<div class="box-body">
 		{% if dataresponden.group in list123 %}
+			{% if dataresponden.jenis_kelamin is 0  %}
+				<img src="{% static ''%}img/mansm.jpg" width="200px" class="pull-left img-responsive">
+			{% else %}
+				<img src="{% static ''%}img/womsm.jpg" width="200px" class="pull-left img-responsive">
+			{% endif %}
 			<p>Anda adalah seorang pribadi yang aktif, penuh percaya diri, dan penyuka tantangan. Anda fokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Dengan kepribadian itu, maka setiap ada kesempatan yang membuat Anda sukses, maka diambil.</p>
 			<p>Kesuksesan bagi Anda adalah tercapainya hasil positif dan kegagalan adalah tidak tercapainya hasil positif, sehingga berjuang untuk unggul dalam pekerjaan dan mendapatkan imbalan yang tinggi (penghargaan dan bonus).</p>
 		{% else %}
+			{% if dataresponden.jenis_kelamin is 1  %}
+				<img src="{% static ''%}img/mansi.jpg" width="200px" class="pull-left img-responsive">
+			{% else %}
+				<img src="{% static ''%}img/womsi.jpg" width="200px" class="pull-left img-responsive">	
+			{% endif %}
 			<p>Anda adalah seorang pribadi yang tenang, dan memiliki pendirian yang teguh. Anda fokus pada keselamatan dan keamanan, sehingga cenderung menghindari tantangan . Dengan kepribadian itu, maka Anda sangat berhati-hati dalam bertindak (lebih baik aman dari pada menyesal nanti).</p>
 			<p>Kesuksesan bagi Anda adalah tidak adanya hasil negatif dan kegagalan adalah adanya hasil negatif. Bagi Anda menghindari berbuat kesalahan adalah sebagai wujud tanggung jawab dan keamanan Anda.</p>
 		{% endif %}
