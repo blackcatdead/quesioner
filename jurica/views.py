@@ -110,11 +110,12 @@ def finish(request):
 
 @decoadmin
 def admin(request):
-	template = loader.get_template('baseadmin.html')
-	context = {
-		'page': 'Admin',
-    }
-	return HttpResponse(template.render(context, request))
+	# template = loader.get_template('baseadmin.html')
+	# context = {
+	# 	'page': 'Admin',
+ #    }
+	# return HttpResponse(template.render(context, request))
+	return redirect('responden')
 
 @tesdeco
 @ifselesai
@@ -191,7 +192,9 @@ def getGroup():
 	for r in rS:
 		g[r.group]+=1
 
-	return min(g.iteritems(), key=operator.itemgetter(1))[0]
+	print(g)
+
+	return min(g.items(), key=operator.itemgetter(1))[0]
 
 def submitanswer(id_r, quest,val):
 	isfailed= 0
@@ -199,7 +202,7 @@ def submitanswer(id_r, quest,val):
 	
 	anz[1]=[0,1,1,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	anz[2]=[0,1,1,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0]
-	anz[3]=[0,1,1,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	anz[3]=[0,1,1,1,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	anz[4]=[0,1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	anz[5]=[0,1,2,2,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	anz[6]=[0,1,2,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -306,6 +309,22 @@ def removeresponden(request):
 	else:
 		return HttpResponse(template.render(context, request))
 
+@decoadmin
+def exportexcel(request):
+	responden_aktif= Responden.objects.filter(status=1).count()
+	responden_sukses= Responden.objects.filter(status=2).count()
+	responden_gagal= Responden.objects.filter(status=3).count()
+	responden_total= Responden.objects.count()
+	template = loader.get_template('a_exportexcel.html')
+	context = {
+		'page': 'Export Excel',
+		'responden_aktif': responden_aktif,
+		'responden_sukses': responden_sukses,
+		'responden_gagal': responden_gagal,
+		'responden_total': responden_total,
+	}
+	return HttpResponse(template.render(context, request))
+
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.core import serializers
@@ -361,6 +380,7 @@ def table_responden(request):
 		asd='<div class="progress progress-sm active"><div class="progress-bar progress-bar-'+clas+' progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '+str(progress)+'%">'+str(progress)+'%</div>'
 		dt['group']=x['fields']['group']
 		dt['email']=x['fields']['email']
+		dt['stage']=str(x['fields']['stage'])+'/5'
 		# dt['tags']=x['fields']['tags']
 		# dt['category']=x['fields']['category']
 		rows.append(dt)
@@ -368,3 +388,36 @@ def table_responden(request):
 		pass
 	response_data['rows']=rows
 	return JsonResponse(response_data, safe=False)
+
+
+import xlwt
+@decoadmin
+def export_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="Report Studi Akuntansi.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Responden')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['id', 'nama', 'email', 'nomor_hp', 'jenis_kelamin', 'usia', 'pendidikan', 'program', 'semester', 'masa_kerja', 'status', 'score']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Responden.objects.all().values_list('id_responden', 'nama', 'email', 'nomor_hp', 'jenis_kelamin', 'usia', 'pendidikan', 'program', 'semester', 'masa_kerja', 'status', 'score')
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response

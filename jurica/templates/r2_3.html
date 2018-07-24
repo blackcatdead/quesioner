@@ -1,9 +1,13 @@
+{% load static %}
 <div class="box box-default">
 	<div class="box-header with-border">
 		<h3 class="box-title">Rapat Pengajuan Anggaran Tahun 2018</h3>
 	</div>
 	<div class="box-body">
-		GAMBAR
+		<center>
+			<img src="{% static ''%}img/rapat2.jpg">	
+		</center>
+		
 	</div>
 	<div class="box-footer">
 	    <a href="{% url 'pertanyaan' %}/?n=4" class="btn btn-primary pull-right">Next</a>

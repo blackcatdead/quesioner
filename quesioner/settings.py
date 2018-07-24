@@ -139,3 +139,4 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'masuk'
 MEDIA_ROOT= os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL= "/media/"
+

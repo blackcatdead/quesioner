@@ -73,7 +73,7 @@
     </form>
     <br/>
     <center>
-    	<a href="{% url 'mendaftar' %}" class="text-center">Mendafta partisipan baru</a>
+    	<a href="{% url 'mendaftar' %}" class="text-center">Mendaftar partisipan baru</a>
     </center>
   </div>
   <!-- /.login-box-body -->
@@ -106,19 +106,27 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				
-				<h4 class="modal-title">PERSETUJUAN PARTISIPAN</h4>
+				<h4 class="modal-title" id="modal_title">SELAMAT DATANG</h4>
 			</div>
-			<div class="modal-body">
+      <div class="modal-body" id="page1">
+        <p>Anda diminta untuk mengisi persetujuan partisipan untuk memastikan Anda bersedia sebagai partisipan dalam studi ini.</p>
+        <p>Selanjutnya Anda diminta untuk mendaftar terlebih dahulu sebagai partisipan untuk dapat login dalam studi ini.</p>
+        <p>Terima kasih.</p>
+      </div>
+			<div class="modal-body" id="page2" style="display: none;">
 				<p>Anda diundang untuk berpartisipasi dalam studi akuntansi manajemen keperilakuan. Anda diminta untuk menghayati dan merespon sebuah skenario dengan membuat pertimbangan atas skenario tersebut. Dalam studi ini Anda berperan sebagai kontroler unit bisnis perusahaan.</p>
-				<p>Tidak ada risiko atas keikutsertaan Anda dalam penelitian ini, pun tidak ada manfaat langsung selain kompensasi sehubungan dengan partisipasi anda tersebut. Atas keikutsertaan Anda, kami akan memberikan kompensasi dalam bentuk pulsa yang akan dikirim secara elektronik ke nomor seluler yang Anda cantumkan dalam isian data demografis atau dalam bentuk souvenir lainnya. Anda juga berkesempatan memenangkan insentif yang menarik jika Anda dapat menjawab pertanyaanpertanyaan dengan tepat.</p>
+				<p>Tidak ada risiko atas keikutsertaan Anda dalam penelitian ini, pun tidak ada manfaat langsung selain kompensasi sehubungan dengan partisipasi anda tersebut. Atas keikutsertaan Anda, kami akan memberikan kompensasi dalam bentuk pulsa yang akan dikirim secara elektronik ke nomor seluler yang Anda cantumkan dalam isian data demografis atau dalam bentuk souvenir lainnya. Anda juga berkesempatan memenangkan insentif yang menarik jika Anda dapat menjawab pertanyaan - pertanyaan dengan tepat.</p>
 				<p>Partisipasi dalam studi ini membutuhkan waktu sekitar 15 - 30 menit tanpa terputus dan bersifat sukarela. Untuk akuntabilitas penelitian dan teknis pengiriman insentif, kami perlu mencatat identitas Anda. Kami menjamin semua informasi terkait dengan identitas Anda terjaga kerahasiaannya dan hanya digunakan untuk tujuan akademik.</p>
 				<p>Jika Anda menaruh perhatian mengenai isu studi ini dan ingin mendiskusikan suatu hal berkenaan dengan itu, kami menyediakan diri untuk dikontak via email jurica.lucyanda71@gmail.com atau kontak telpon di +6281319665071.</p>
 				<p>Atas kesediaan dan kerjasama Anda, kami ucapkan terima kasih</p>
 				<p>Saya menyetujui menjadi partisipan:</p>
 			</div>
+      
 			<div class="modal-footer">
-				<a type="button" class="btn btn-danger pull-left" href="{% url 'informasi' %}">Tidak</a>
-				<button type="button" class="btn btn-success" data-dismiss="modal">Setuju</button>
+				<!-- <a type="button" class="btn btn-danger pull-left" href="{% url 'informasi' %}">Tidak</a> -->
+        <button type="button" class="btn btn-danger pull-left" id="btn_kembali" style="display: none;">Kembali</button>
+				<button id="btn_setuju" type="button" class="btn btn-success" data-dismiss="modal" style="display: none;">Setuju</button>
+        <button class="btn btn-success" id="btn_next">Next</button>
 			</div>
 		</div>
 
@@ -143,6 +151,26 @@
 		  increaseArea: '20%' // optional
 		});
 	});
+
+  $('#btn_next').click(function () {
+     // alert('asdasdasd')
+     $("#page1").hide();
+     $("#page2").show();
+     $("#btn_next").hide();
+     $("#btn_kembali").show();
+     $("#btn_setuju").show();
+     $("#modal_title").text("PERSETUJUAN PARTISIPAN");
+  });
+
+  $('#btn_kembali').click(function () {
+     // alert('asdasdasd')
+     $("#page1").show();
+     $("#page2").hide();
+     $("#btn_next").show();
+     $("#btn_kembali").hide();
+     $("#btn_setuju").hide();
+     $("#modal_title").text("SELAMAT DATANG");
+  });
 
 	$(window).on('load',function(){
 		{% if request.GET.init %}
