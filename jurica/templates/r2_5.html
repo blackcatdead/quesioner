@@ -26,15 +26,18 @@
 						</ul>
 					</div>
 				</li>
-				<li>
-					<p>Apakah kode etik Perusahaan CITRA memiliki sanksi yang jelas?</p>
-					<div class="form-group">
-						<ul style="list-style-type:none">
-							<li><input type="radio" name="q-6" class="flat-blue" value="1" required> A. Ya</li>
-		                	<li><input type="radio" name="q-6" class="flat-blue" value="2" required> B. Tidak</li>
-						</ul>
-					</div>
-				</li>
+				{% if dataresponden.group is not 1 and dataresponden.group is not 4 %}
+					<li>
+						<p>Apakah kode etik Perusahaan CITRA memiliki sanksi yang jelas?</p>
+						<div class="form-group">
+							<ul style="list-style-type:none">
+								<li><input type="radio" name="q-6" class="flat-blue" value="1" required> A. Ya</li>
+			                	<li><input type="radio" name="q-6" class="flat-blue" value="2" required> B. Tidak</li>
+							</ul>
+						</div>
+					</li>
+				{% endif %}
+				
 			</ol>
 		</div>
 		<div class="box-footer">

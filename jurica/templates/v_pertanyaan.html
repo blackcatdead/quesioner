@@ -67,7 +67,15 @@
 	    increaseArea: '20%' // optional
 	  });
 	});
-	
+
+	$("form").submit(function() {
+		// $(this).button('loading')
+	    $(this).submit(function() {
+
+	        return false;
+	    });
+	    return true;
+	});
 
 </script>
 {% endblock %}
