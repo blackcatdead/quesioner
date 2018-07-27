@@ -105,7 +105,7 @@ def finish(request):
 		'data': 'Main',
 		'dataresponden': r,
     }
-	print(r.status)
+	# print(r.status)
 	return HttpResponse(template.render(context, request))
 
 @decoadmin
@@ -192,7 +192,7 @@ def getGroup():
 	for r in rS:
 		g[r.group]+=1
 
-	print(g)
+	# print(g)
 
 	return min(g.items(), key=operator.itemgetter(1))[0]
 
