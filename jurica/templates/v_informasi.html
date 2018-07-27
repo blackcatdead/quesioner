@@ -23,7 +23,7 @@
 	</div>
 	<div class="box-footer">
 		{% if dataresponden.stage %}
-			 <a type="submit" class="btn btn-{% if dataresponden.status == 3 %}danger{% elif dataresponden.status == 2 %}success{% endif%} pull-right" href="{% url 'pertanyaan' %}">Menuju Pertanyaan</a>
+			 <a type="submit" class="btn btn-{% if dataresponden.status == 3 %}danger{% elif dataresponden.status == 2 %}success{% else%}primary{% endif%} pull-right" href="{% url 'pertanyaan' %}">Menuju Pertanyaan</a>
 		{% else %}
 			<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Menuju Pertanyaan</button>
 		{% endif %}
