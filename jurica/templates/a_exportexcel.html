@@ -27,30 +27,26 @@
 			    </div>
 			</div><!-- /.box-header -->
 			<div class="box-body">
-				<div class="row">
-					<div class="col-xs-12">
-						<table class="table table-striped table-hover">
-						    <tbody>
-						    	<tr>
-						            <td>Aktif</td>
-						            <td>: {{ responden_aktif }}</td>
-						        </tr>
-						        <tr>
-						            <td>Sukses</td>
-						            <td>: {{ responden_sukses }}</td>
-						        </tr>
-						        <tr>
-						            <td>Gagal</td>
-						            <td>: {{ responden_gagal }}</td>
-						        </tr>
-						        <tr>
-						            <th>Total Responden</th>
-						            <th>: {{ responden_total }}</th>
-						        </tr>
-						    </tbody>
-						</table>
-					</div>
-				</div>
+				<table class="table table-striped table-hover">
+				    <tbody>
+				    	<tr>
+				            <td>Aktif</td>
+				            <td>: {{ responden_aktif }}</td>
+				        </tr>
+				        <tr>
+				            <td>Sukses</td>
+				            <td>: {{ responden_sukses }}</td>
+				        </tr>
+				        <tr>
+				            <td>Gagal</td>
+				            <td>: {{ responden_gagal }}</td>
+				        </tr>
+				        <tr>
+				            <th>Total Responden</th>
+				            <th>: {{ responden_total }}</th>
+				        </tr>
+				    </tbody>
+				</table>
 			</div><!-- /.box-body -->
 			<div class="box-footer">
 				<a href="{% url 'export_xls' %}" class="btn btn-block btn-success btn-flat">Download Excel</a>
