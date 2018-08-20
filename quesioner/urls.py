@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^admin/resetresponden/$', jurica.resetresponden, name='resetresponden'),
     url(r'^admin/detailresponden/$', jurica.detailresponden, name='detailresponden'),
     url(r'^admin/exportexcel/$', jurica.exportexcel, name='exportexcel'),
-    url(r'^admin/export_xls/$', jurica.export_xls, name='export_xls'),
+    url(r'^admin/export_xls/$', jurica.export_xls2, name='export_xls'),
     
     url(r'^admin/', jurica.admin, name='admin'),
     url(r'^ajax/table_responden/', jurica.table_responden, name='table_responden'),

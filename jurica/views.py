@@ -421,3 +421,108 @@ def export_xls(request):
 
     wb.save(response)
     return response
+
+import xlwt
+@decoadmin
+def export_xls2(request):
+	response = HttpResponse(content_type='application/ms-excel')
+	response['Content-Disposition'] = 'attachment; filename="Report Studi Akuntansi.xls"'
+
+	wb = xlwt.Workbook(encoding='utf-8')
+	ws = wb.add_sheet('Responden')
+
+	# Sheet header, first row
+	row_num = 0
+
+	font_style = xlwt.XFStyle()
+	font_style.font.bold = True
+
+	ws.write(row_num, 0, 'Tabulasi Partisipan', font_style)
+
+	row_num +=1
+	columns = ['N', 'ID', 'JK', 'JP', 'PS', 'P', 'U', 'Group', 'Respons #1', 'Respons #2', 'Respons #3', 'Respons #4', 'Poin', '% Selesai', 'Status', 'Durasi']
+	curcol=0
+	for col_num in range(len(columns)):
+		# print(curcol)
+		if col_num==8:
+			ws.write_merge(row_num, row_num, curcol, curcol+2, columns[col_num], font_style)
+			curcol+=3
+		elif col_num==9:
+			ws.write_merge(row_num, row_num, curcol, curcol+2, columns[col_num], font_style)
+			curcol+=3
+		elif col_num==10:
+			ws.write_merge(row_num, row_num, curcol, curcol+1, columns[col_num], font_style)
+			curcol+=2
+		elif col_num==11:
+			ws.write_merge(row_num, row_num, curcol, curcol+12, columns[col_num], font_style)
+			curcol+=13
+		else:
+			# ws.write(row_num, curcol, columns[col_num], font_style)
+			ws.write_merge(row_num, row_num+1, curcol, curcol, columns[col_num], font_style)
+			curcol+=1
+
+	row_num +=1
+	columns = ['1', '2', '3', '1', '2', '3', '1', '2', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', 'Total', 'FRI Ukur']
+	curcol=8
+	for col_num in range(len(columns)):
+		ws.write(row_num, curcol, columns[col_num], font_style)
+		curcol+=1
+
+	# Sheet body, remaining rows
+	font_style = xlwt.XFStyle()
+	# row_num +=1
+	# rows = Responden.objects.all().values_list('id_responden', 'nama', 'email', 'nomor_hp', 'jenis_kelamin', 'usia', 'pendidikan', 'program', 'semester', 'masa_kerja', 'status', 'score')
+
+	jawaban= Jawaban.objects.all()
+	dic = {}
+
+	for j in jawaban:
+		if not j.responden.id_responden in dic:
+			dic[j.responden.id_responden]={}
+			dic[j.responden.id_responden][20]=0
+		dic[j.responden.id_responden][j.id_pertanyaan]=j.jawaban
+
+		if j.id_pertanyaan >= 9:
+			dic[j.responden.id_responden][20]+=int(j.jawaban)
+
+	for x in dic:
+		dic[x][21]= 'Promosi' if dic[x][20]<30 else 'Preverensi'
+	# print(dic)
+
+
+	rows = Responden.objects.all().values_list('id_responden', 'jenis_kelamin', 'pendidikan', 'program', 'masa_kerja', 'usia', 'group', 'score', 'stage', 'status', 'start', 'end')
+	number=1
+	for row in rows:
+	    row_num += 1
+	    curcol=0
+	    for col_num in range(len(row)):
+	    	if col_num==7:
+	    		curcol+=22
+	    	else:
+	    		curcol+=1
+
+	    	if col_num==8:
+	    		ws.write(row_num, curcol, str(row[col_num]/5*100)+'%', font_style)
+	    	elif col_num==9:
+	    		ws.write(row_num, curcol, ('Aktif' if row[col_num]==1 else ('Sukses' if row[col_num]==2 else ('Gagal' if row[col_num]==3 else 'Tidak Aktif'))), font_style)
+	    	elif col_num==10:
+	    		aaa= (row[col_num+1]-row[col_num] if (row[col_num] is not None and row[col_num+1] is not None) else '')
+	    		ws.write(row_num, curcol, str(aaa), font_style)
+	    	elif col_num==11:
+	    		pass
+	    	else:
+	    		ws.write(row_num, curcol, str(row[col_num]), font_style)
+	    ws.write(row_num, 0, row_num-2, font_style)
+
+	    if row[0] in dic:
+		    for d in dic[row[0]]:
+		    	tulisan=""
+		    	if d == 1:
+		    		tulisan="Kontroler"
+		    	elif d >1 and d <7:
+		    		tulisan = 'Ya' if dic[row[0]][d] is '1' else ('Tidak' if dic[row[0]][d] is '2' else '')
+		    	else:
+		    		tulisan=dic[row[0]][d]
+		    	ws.write(row_num, 7+d, tulisan, font_style)
+	wb.save(response)
+	return response
