@@ -46,6 +46,8 @@
 	{% elif dataresponden.stage == 3 %}
 		{% if not request.GET.n %}
 			{% include "r3.html" %}
+		{% elif request.GET.n == '1' %}
+			{% include "r3_1.html" %}
 		{% endif %}
 	{% elif dataresponden.stage == 4 %}
 		{% if not request.GET.n %}

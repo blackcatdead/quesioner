@@ -1,145 +1,16 @@
+{% load static %}
 <div class="box box-default">
 	<div class="box-header with-border">
-		<h3 class="box-title">RESPON 3</h3>
+		<h3 class="box-title">PENGAMBILAN KEPUTUSAN</h3>
 	</div>
-	<form method="POST" action="">
-		{% csrf_token %}
-		<div class="box-body">
-			<p>Berdasarkan pada semua informasi yang ada dari layar pertama, berilah keputusan terbaik Anda:</p>
-			<ol>
-				<li>
-					<p>Anda mengajukan anggaran tahun 2018 dengan target ROI 13,5% (dibawah perhitungan target ROI):</p>
-					<table class="table" style="table-layout: fixed;">
-						<tr>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="1" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="2" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="3" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="4" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="5" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="6" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-7" class="flat-blue" value="7" required></center>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<center>1</center>
-							</td>
-							<td>
-								<center>2</center>
-							</td>
-							<td>
-								<center>3</center>
-							</td>
-							<td>
-								<center>4</center>
-							</td>
-							<td>
-								<center>5</center>
-							</td>
-							<td>
-								<center>6</center>
-							</td>
-							<td>
-								<center>7</center>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<span class="pull-left"><strong>Sangat Tidak Setuju</strong></span>
-							</td>
+	<div class="box-body">
+		<p>Anda berfokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Mengajukan anggaran sesuai dengan permintaan Dino adalah kesempatan untuk mendapatkan bonus. <strong>Bagi Anda bonus adalah ukuran dari kinerja</strong>. Selain itu perusahaan CITRA saat ini <strong>belum mempunyai kode etik</strong> tertulis sebagai pedoman perilaku etis karyawan. Sehingga jika terjadi pelanggaran etika yang dilakukan oleh karyawan maka tidak ada tindakan yang diambil perusahaan untuk memberikan sanksi atas pelanggaran tersebut.
+		</p>
+		
+	</div>
+	<div class="box-footer">
+	    <a href="{% url 'pertanyaan' %}/?n=1" class="btn btn-primary pull-right">Next</a>
+	</div>
 
-							<td colspan="3">
-								<center><span><strong>Netral</strong></span></center>
-							</td>
-
-							<td colspan="2">
-								<span class="pull-right"><strong>Sangat Setuju</strong></span>
-							</td>
-						</tr>
-					</table>
-
-				</li>
-				<li>
-					<p>Mengajukan anggaran tahun 2018 berdasarkan target ROI 13,5% merupakan suatu tindakan taketis:</p>
-					<table class="table" style="table-layout: fixed;">
-						<tr>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="1" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="2" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="3" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="4" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="5" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="6" required></center>
-							</td>
-							<td>
-								<center><input type="radio" name="q-8" class="flat-blue" value="7" required></center>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<center>1</center>
-							</td>
-							<td>
-								<center>2</center>
-							</td>
-							<td>
-								<center>3</center>
-							</td>
-							<td>
-								<center>4</center>
-							</td>
-							<td>
-								<center>5</center>
-							</td>
-							<td>
-								<center>6</center>
-							</td>
-							<td>
-								<center>7</center>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<span class="pull-left"><strong>Sangat Tidak Setuju</strong></span>
-							</td>
-
-							<td colspan="3">
-								<center><span><strong>Netral</strong></span></center>
-							</td>
-
-							<td colspan="2">
-								<span class="pull-right"><strong>Sangat Setuju</strong></span>
-							</td>
-						</tr>
-					</table>
-				</li>
-			</ol>
-		</div>
-		<div class="box-footer">
-		    <button type="submit" class="btn btn-primary pull-right">Menuju Respon #4</button>
-		</div>
-	</form>
+	<!-- /.box-body -->
 </div>
