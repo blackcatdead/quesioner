@@ -4,9 +4,25 @@
 		<h3 class="box-title">PENGAMBILAN KEPUTUSAN</h3>
 	</div>
 	<div class="box-body">
-		<p>Anda berfokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Mengajukan anggaran sesuai dengan permintaan Dino adalah kesempatan untuk mendapatkan bonus. <strong>Bagi Anda bonus adalah ukuran dari kinerja</strong>. Selain itu perusahaan CITRA saat ini <strong>belum mempunyai kode etik</strong> tertulis sebagai pedoman perilaku etis karyawan. Sehingga jika terjadi pelanggaran etika yang dilakukan oleh karyawan maka tidak ada tindakan yang diambil perusahaan untuk memberikan sanksi atas pelanggaran tersebut.
-		</p>
-		
+		{% if dataresponden.group is 1 %}
+			<p>Perusahaan CITRA saat ini <strong>belum mempunyai kode etik tertulis</strong> sebagai pedoman perilaku etis karyawan. Alhasil ketika terjadi pelanggaran etika yang dilakukan oleh karyawan maka tidak ada tindakan yang diambil perusahaan untuk memberikan sanksi atas pelanggaran tersebut.</p>
+		{% elif dataresponden.group is 2 %}
+			<p>Anda berfokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Mengajukan anggaran sesuai dengan permintaan Dino adalah kesempatan untuk mendapatkan bonus. <strong>Bagi Anda bonus adalah ukuran dari kinerja.</strong></p>
+			<p>Perusahaan CITRA <strong>memiliki kode etik</strong> tertulis. Namun, keberadaan <strong>kode etik</strong> perusahaan <strong>tidak diikuti aturan mengenai sanksi</strong> bila terjadi pelanggaran etika. Sehingga <strong>kasus pelanggaran etika</strong> yang pernah ada nyatanya berlalu begitu saja <strong>tanpa penyelesaian dan pemberian sanksi</strong>.</p>
+		{% elif dataresponden.group is 3 %}
+			<p>Anda berfokus pada prestasi dan kemajuan karir, dan sangat bersemangat untuk mencapainya. Mengajukan anggaran sesuai dengan permintaan Dino patut dipertimbangkan karena perusahaan <strong>memiliki kode etik</strong> tertulis. Kode etik mengharuskan setiap karyawan bertindak jujur dan berintegritas, menghindari konflik kepentingan, memberikan informasi yang objektif dan dilarang menggunakan informasi rahasia untuk kepentingan pribadi, serta bertanggung jawab dan berhati-hati. </p>
+			<p><strong>Pelanggaran</strong> terhadap kode etik perusahaan dapat <strong>dikenakan sanksi</strong>, mulai dari <strong>sanksi disiplin hingga pemutusan kerja</strong>. Karyawan menganggap <strong>keberadaan kode etik</strong> sesuatu hal yang <strong>penting</strong> dan <strong>wajib dipatuhi</strong>.</p>
+		{% elif dataresponden.group is 4 %}
+			<p><strong>Anda</strong> adalah <strong>seorang pribadi</strong> yang <strong>tenang</strong>, <strong>berpendirian teguh</strong>, dan berfokus pada <strong>keselamatan dan keamanan</strong>. Dengan kepribadian itu, maka Anda sangat <strong>berhati-hati dalam bertindak</strong> (lebih baik aman dari pada menyesal nanti). Bagi Anda <strong>menghindari berbuat kesalahan</strong> adalah sebagai <strong>wujud tanggung jawab dan keamanan</strong> Anda.</p>
+			<p>Perusahaan CITRA saat ini <strong>belum mempunyai kode etik</strong> tertulis sebagai pedoman perilaku etis karyawan. Sehingga jika terjadi pelanggaran etika yang dilakukan oleh karyawan maka tidak ada tindakan yang diambil perusahaan untuk memberikan sanksi atas pelanggaran tersebut.</p>
+		{% elif dataresponden.group is 5 %}
+			<p><strong>Anda</strong> adalah <strong>seorang pribadi</strong> yang <strong>tenang</strong>, <strong>berpendirian teguh</strong>, dan berfokus pada <strong>keselamatan dan keamanan</strong>. Dengan kepribadian itu, maka Anda sangat <strong>berhati-hati dalam bertindak</strong> (lebih baik aman dari pada menyesal nanti). Bagi Anda <strong>menghindari berbuat kesalahan</strong> adalah sebagai <strong>wujud tanggung jawab dan keamanan</strong> Anda.</p>
+			<p>Perusahaan CITRA <strong>memiliki kode etik</strong> tertulis. Namun, keberadaan <strong>kode etik</strong> perusahaan <strong>tidak diikuti aturan mengenai sanksi</strong> bila terjadi pelanggaran etika. Sehingga <strong>kasus pelanggaran etika</strong> yang pernah ada nyatanya berlalu begitu saja <strong>tanpa penyelesaian dan pemberian sanksi</strong>. </p>
+		{% elif dataresponden.group is 6 %}
+			<p><strong>Anda</strong> adalah <strong>seorang pribadi</strong> yang <strong>tenang</strong>, <strong>berpendirian teguh</strong>, dan berfokus pada <strong>keselamatan dan keamanan</strong>. Dengan kepribadian itu, maka Anda sangat <strong>berhati-hati dalam bertindak</strong> (lebih baik aman dari pada menyesal nanti). Bagi Anda <strong>menghindari berbuat kesalahan</strong> adalah sebagai <strong>wujud tanggung jawab dan keamanan</strong> Anda.</p>
+			<p>Mengajukan anggaran sesuai dengan permintaan Dino patut dipertimbangkan karena perusahaan <strong>memiliki kode etik</strong> tertulis. Kode etik mengharuskan setiap karyawan bertindak jujur dan berintegritas, menghindari konflik kepentingan, memberikan informasi yang objektif dan dilarang menggunakan informasi rahasia untuk kepentingan pribadi, serta bertanggung jawab dan berhati-hati. </p>
+			<p><strong>Pelanggaran</strong> terhadap kode etik perusahaan dapat <strong>dikenakan sanksi</strong>, mulai dari <strong>sanksi disiplin hingga pemutusan kerja</strong>. Karyawan menganggap <strong>keberadaan kode etik</strong> sesuatu hal yang <strong>penting</strong> dan <strong>wajib dipatuhi</strong>.</p>
+		{% endif %}
 	</div>
 	<div class="box-footer">
 	    <a href="{% url 'pertanyaan' %}/?n=1" class="btn btn-primary pull-right">Next</a>
